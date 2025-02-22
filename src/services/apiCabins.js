@@ -4,8 +4,6 @@ import supabase, { supabaseUrl } from './supabase';
 export async function getCabins() {
   const { data, error } = await supabase.from("cabins").select("*");
 
-  console.log("🚀 ~ getCabins ~ error -1-1-1-:", error)
-  console.log("🚀 ~ getCabins ~ data:", data)
   if (error) {
     console.error(error);
     throw new Error("Cabins could not be loaded");
@@ -23,7 +21,7 @@ export async function createEditCabin(newCabin, id) {
   );
   const imagePath = hasImagePath
     ? newCabin.image
-    : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+    : `${supabaseUrl}/storage/v1/object/public/cabins/${imageName}`;
 
   // 1. Create/edit cabin
   let query = supabase.from("cabins");
@@ -45,7 +43,7 @@ export async function createEditCabin(newCabin, id) {
   if (hasImagePath) return data;
 
   const { error: storageError } = await supabase.storage
-    .from("cabin-images")
+    .from("cabins")
     .upload(imageName, newCabin.image);
 
   // 3. Delete the cabin IF there was an error uplaoding image

@@ -3,8 +3,9 @@ import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import FeedbackStats from "../features/sellerFeedback/FeedbackStats";
 import FeedbackTable from "../features/sellerFeedback/FeedbackTable";
+import { sellerInfo, totalOneStar } from "../features/sellerFeedback/feedbackData";
 
-const SellerInfo = styled.div`
+const SellerInfoBar = styled.div`
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-sm);
@@ -35,6 +36,13 @@ const InfoValue = styled.span`
   color: var(--color-grey-800);
 `;
 
+const SectionHeading = styled.h2`
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-grey-700);
+  margin-bottom: 2rem;
+`;
+
 function SellerFeedback() {
   return (
     <>
@@ -42,30 +50,42 @@ function SellerFeedback() {
         <Heading as="h1">Seller Feedback Analysis</Heading>
       </Row>
 
-      <SellerInfo>
+      <SellerInfoBar>
+        <InfoItem>
+          <InfoLabel>Seller Name</InfoLabel>
+          <InfoValue>{sellerInfo.name}</InfoValue>
+        </InfoItem>
+        <InfoItem>
+          <InfoLabel>Legal Entity</InfoLabel>
+          <InfoValue>{sellerInfo.legalName}</InfoValue>
+        </InfoItem>
         <InfoItem>
           <InfoLabel>Seller ID</InfoLabel>
-          <InfoValue>AQUYM0O99MFUT</InfoValue>
+          <InfoValue style={{ fontSize: "1.3rem", fontFamily: "monospace" }}>{sellerInfo.sellerId}</InfoValue>
         </InfoItem>
         <InfoItem>
-          <InfoLabel>Platform</InfoLabel>
-          <InfoValue>Amazon India</InfoValue>
+          <InfoLabel>Location</InfoLabel>
+          <InfoValue>{sellerInfo.location}</InfoValue>
         </InfoItem>
         <InfoItem>
-          <InfoLabel>Product (ASIN)</InfoLabel>
-          <InfoValue>B0DSKNQW8F</InfoValue>
+          <InfoLabel>Active Since</InfoLabel>
+          <InfoValue>{sellerInfo.activeSince}</InfoValue>
+        </InfoItem>
+        <InfoItem>
+          <InfoLabel>Total Reviews</InfoLabel>
+          <InfoValue>{sellerInfo.totalFeedback}</InfoValue>
         </InfoItem>
         <InfoItem>
           <InfoLabel>Filter Applied</InfoLabel>
-          <InfoValue style={{ color: "var(--color-red-700)" }}>1-Star Reviews Only</InfoValue>
+          <InfoValue style={{ color: "var(--color-red-700)" }}>1-Star Only</InfoValue>
         </InfoItem>
-      </SellerInfo>
+      </SellerInfoBar>
 
       <FeedbackStats />
 
-      <Heading as="h2" style={{ marginBottom: "2rem" }}>
-        1-Star Reviews ({15} total)
-      </Heading>
+      <SectionHeading>
+        1-Star Reviews — {totalOneStar} sampled complaints (researched across 9 sources)
+      </SectionHeading>
 
       <FeedbackTable />
     </>

@@ -17,18 +17,29 @@ const Reviewer = styled.span`
 `;
 
 const Product = styled.span`
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: var(--color-grey-500);
+  display: block;
+  margin-top: 0.2rem;
+`;
+
+const Amount = styled.span`
+  font-size: 1.2rem;
+  color: var(--color-red-700);
+  font-weight: 600;
+  display: block;
+  margin-top: 0.2rem;
 `;
 
 const Stars = styled.div`
   display: flex;
   gap: 0.2rem;
   color: var(--color-red-700);
+  margin-bottom: 0.4rem;
 `;
 
 function FeedbackRow({ feedback }) {
-  const { rating, date, reviewer, comment, category, product } = feedback;
+  const { rating, date, reviewer, comment, category, product, amount } = feedback;
   const cat = FEEDBACK_CATEGORIES[category];
 
   return (
@@ -40,8 +51,8 @@ function FeedbackRow({ feedback }) {
           ))}
         </Stars>
         <Reviewer>{reviewer}</Reviewer>
-        <br />
         <Product>{product}</Product>
+        {amount && <Amount>₹{amount.toLocaleString("en-IN")}</Amount>}
       </div>
 
       <ReviewText>{comment}</ReviewText>

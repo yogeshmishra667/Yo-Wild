@@ -12,6 +12,7 @@ import Account from "./pages/Account";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
+import SellerFeedback from "./pages/SellerFeedback";
 import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
@@ -39,6 +40,7 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="settings" element={<Settings />} />
             <Route path="account" element={<Account />} />
+            <Route path="seller-feedback" element={<SellerFeedback />} />
           </Route>
 
           <Route path="login" element={<Login />} />
